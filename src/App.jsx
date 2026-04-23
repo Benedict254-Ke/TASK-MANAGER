@@ -286,3 +286,6 @@ export default function App() {
     </div>
   );
 }
+<p className="text-center text-gray-400 text-sm mt-10">
+  Built by Lulu B 💻
+</p>
