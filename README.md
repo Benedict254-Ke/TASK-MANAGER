@@ -1,21 +1,184 @@
-<<<<<<< HEAD
-# React + Vite
+# 🚀 TaskFlow – Advanced Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, feature-rich task management application built with **React** and **Tailwind CSS**, designed to help users stay organized, track progress, and manage tasks efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+👉 https://your-vercel-link.vercel.app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📸 Preview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# TASK-MANAGER
-Pure frontend only made. Purely working without any bugs or fails
->>>>>>> e084f2cf85a36e109e523f4a05a9a60bf6e41578
+*Add screenshots here (recommended for portfolio impact)*
+
+---
+
+## 🧠 Overview
+
+TaskFlow goes beyond a simple to-do list. It implements real-world productivity features such as **subtasks, drag-and-drop, smart completion logic, and calendar integration**, making it closer to tools like Notion, Trello, or Asana.
+
+---
+
+## ✨ Features
+
+### 📝 Task Management
+
+* Create, edit, and delete tasks
+* Mark tasks as completed
+* Clear all completed tasks
+
+### 📊 Subtasks (Checklist System)
+
+* Add subtasks to any task
+* Track progress (e.g., 2/5 completed)
+* Auto-complete parent task when all subtasks are done
+
+### 🎯 Priority & Deadlines
+
+* Set priority levels (Low, Medium, High)
+* Assign due dates
+* Highlight overdue tasks visually
+
+### 🔍 Search & Filtering
+
+* Filter tasks (All / Active / Completed)
+* Real-time search functionality
+
+### 📌 Drag & Drop
+
+* Reorder tasks using drag-and-drop
+* Order persists across sessions
+
+### 🔔 Notifications
+
+* Browser notifications for tasks due within 24 hours
+
+### 📅 Google Calendar Integration
+
+* Add tasks directly to Google Calendar
+* Pre-filled event details for quick scheduling
+
+### 📈 Dashboard (Toggle View)
+
+* Total tasks
+* Active tasks
+* Completed tasks
+* Overdue tasks
+
+### 🎨 UI/UX Enhancements
+
+* Smooth animations (Framer Motion)
+* Clean, responsive design with Tailwind CSS
+* Interactive task cards
+
+### 💾 Data Persistence
+
+* Uses **LocalStorage** to save tasks
+* Data remains after page refresh
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** React (Hooks)
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion
+* **Drag & Drop:** @hello-pangea/dnd
+* **Icons:** React Icons
+* **Storage:** Browser LocalStorage
+
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/taskflow.git
+cd taskflow
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+---
+
+## 🧩 Project Structure
+
+```
+src/
+ ├── components/
+ │    ├── TaskInput.jsx
+ │    ├── TaskList.jsx
+ │    ├── TaskItem.jsx
+ │    ├── FilterTabs.jsx
+ │    ├── Dashboard.jsx
+ │
+ ├── App.jsx
+ ├── main.jsx
+ ├── index.css
+```
+
+---
+
+## 🚀 Future Improvements
+
+* Backend integration (Node.js + database)
+* User authentication (login/signup)
+* Email reminders for due tasks
+* Cloud data sync (instead of LocalStorage)
+* Mobile app version
+
+---
+
+## 💡 Key Learnings
+
+* Managing complex state in React
+* Handling nested data structures (tasks + subtasks)
+* Implementing drag-and-drop interactions
+* Building real-world UI/UX features
+* Working with browser APIs (Notifications, LocalStorage)
+
+---
+
+## 👨‍💻 Author
+
+**Benedict Wambua (Lulu B)**
+Frontend Developer | Software Developer
+
+* GitHub: https://github.com/your-username
+* LinkedIn: https://linkedin.com/in/your-profile
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project:
+
+* ⭐ Star the repo
+* 🍴 Fork it
+* 📢 Share it
+
+---
+
+## 📌 License
+
+This project is open-source and available under the MIT License.
