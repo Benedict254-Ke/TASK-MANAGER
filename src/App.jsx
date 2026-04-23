@@ -6,13 +6,15 @@ import Dashboard from "./components/Dashboard";
 
 export default function App() {
   const [tasks, setTasks] = useState(() => {
-  try {
-    const saved = localStorage.getItem("tasks");
-    return saved ? JSON.parse(saved) : [];
-  } catch {
-    return [];
-  }
-});
+    try {
+      const saved = localStorage.getItem("tasks");
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Failed to load tasks from localStorage:", error);
+      return [];
+    }
+  });
 
   const [input, setInput] = useState("");
   const [filter, setFilter] = useState("all");
@@ -23,41 +25,60 @@ export default function App() {
   const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    try {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    } catch (error) {
+      console.error("Failed to save tasks to localStorage:", error);
+    }
   }, [tasks]);
 
   useEffect(() => {
-    if ("Notification" in window && Notification.permission === "default") {
-      Notification.requestPermission();
+    try {
+      if (
+        typeof window !== "undefined" &&
+        "Notification" in window &&
+        Notification.permission === "default"
+      ) {
+        Notification.requestPermission().catch(() => {});
+      }
+    } catch (error) {
+      console.error("Notification permission error:", error);
     }
   }, []);
 
   useEffect(() => {
     const checkDueTasks = () => {
-      const now = new Date();
+      try {
+        const now = new Date();
 
-      tasks.forEach((task) => {
-        if (!task.dueDate || task.completed) return;
+        tasks.forEach((task) => {
+          if (!task?.dueDate || task.completed) return;
 
-        const due = new Date(task.dueDate);
-        const diff = due.getTime() - now.getTime();
+          const due = new Date(task.dueDate);
+          const diff = due.getTime() - now.getTime();
 
-        const oneDay = 24 * 60 * 60 * 1000;
-        const notificationKey = `notified_${task.id}_${task.dueDate}`;
+          const oneDay = 24 * 60 * 60 * 1000;
+          const notificationKey = `notified_${task.id}_${task.dueDate}`;
 
-        if (
-          diff > 0 &&
-          diff <= oneDay &&
-          Notification.permission === "granted" &&
-          !sessionStorage.getItem(notificationKey)
-        ) {
-          new Notification("Task Reminder", {
-            body: `"${task.text}" is due within 24 hours.`,
-          });
+          if (
+            typeof window !== "undefined" &&
+            "Notification" in window &&
+            Notification.permission === "granted" &&
+            typeof sessionStorage !== "undefined" &&
+            diff > 0 &&
+            diff <= oneDay &&
+            !sessionStorage.getItem(notificationKey)
+          ) {
+            new Notification("Task Reminder", {
+              body: `"${task.text}" is due within 24 hours.`,
+            });
 
-          sessionStorage.setItem(notificationKey, "true");
-        }
-      });
+            sessionStorage.setItem(notificationKey, "true");
+          }
+        });
+      } catch (error) {
+        console.error("Due task notification error:", error);
+      }
     };
 
     checkDueTasks();
