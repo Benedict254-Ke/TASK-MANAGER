@@ -3,6 +3,7 @@ import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
 import FilterTabs from "./components/FilterTabs";
 import Dashboard from "./components/Dashboard";
+import SummaryPanel from "./components/SummaryPanel";
 
 export default function App() {
   const [tasks, setTasks] = useState(() => {
@@ -10,8 +11,7 @@ export default function App() {
       const saved = localStorage.getItem("tasks");
       const parsed = saved ? JSON.parse(saved) : [];
       return Array.isArray(parsed) ? parsed : [];
-    } catch (error) {
-      console.error("Failed to load tasks from localStorage:", error);
+    } catch {
       return [];
     }
   });
@@ -23,13 +23,12 @@ export default function App() {
   const [dueDate, setDueDate] = useState("");
   const [search, setSearch] = useState("");
   const [showDashboard, setShowDashboard] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   useEffect(() => {
     try {
       localStorage.setItem("tasks", JSON.stringify(tasks));
-    } catch (error) {
-      console.error("Failed to save tasks to localStorage:", error);
-    }
+    } catch {}
   }, [tasks]);
 
   useEffect(() => {
@@ -41,9 +40,7 @@ export default function App() {
       ) {
         Notification.requestPermission().catch(() => {});
       }
-    } catch (error) {
-      console.error("Notification permission error:", error);
-    }
+    } catch {}
   }, []);
 
   useEffect(() => {
@@ -56,7 +53,6 @@ export default function App() {
 
           const due = new Date(task.dueDate);
           const diff = due.getTime() - now.getTime();
-
           const oneDay = 24 * 60 * 60 * 1000;
           const notificationKey = `notified_${task.id}_${task.dueDate}`;
 
@@ -76,14 +72,11 @@ export default function App() {
             sessionStorage.setItem(notificationKey, "true");
           }
         });
-      } catch (error) {
-        console.error("Due task notification error:", error);
-      }
+      } catch {}
     };
 
     checkDueTasks();
     const interval = setInterval(checkDueTasks, 60000);
-
     return () => clearInterval(interval);
   }, [tasks]);
 
@@ -94,12 +87,7 @@ export default function App() {
       setTasks(
         tasks.map((task) =>
           task.id === editId
-            ? {
-                ...task,
-                text: input,
-                priority,
-                dueDate,
-              }
+            ? { ...task, text: input, priority, dueDate }
             : task
         )
       );
@@ -113,7 +101,6 @@ export default function App() {
         dueDate,
         subtasks: [],
       };
-
       setTasks([...tasks, newTask]);
     }
 
@@ -162,11 +149,7 @@ export default function App() {
             ...task,
             subtasks: [
               ...(task.subtasks || []),
-              {
-                id: Date.now(),
-                text,
-                completed: false,
-              },
+              { id: Date.now(), text, completed: false },
             ],
           };
         }
@@ -212,9 +195,8 @@ export default function App() {
     const endDate = new Date(startDate);
     endDate.setHours(endDate.getHours() + 1);
 
-    const formatDate = (date) => {
-      return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    };
+    const formatDate = (date) =>
+      date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
     const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       task.text
@@ -268,6 +250,17 @@ export default function App() {
 
         {showDashboard && <Dashboard tasks={tasks} />}
       </div>
+
+      <div className="max-w-md mx-auto mb-4">
+        <button
+          onClick={() => setShowSummary(!showSummary)}
+          className="w-full bg-green-600 text-white px-4 py-3 rounded-xl shadow hover:bg-green-700 transition"
+        >
+          {showSummary ? "Hide Progress Summary" : "View Progress Summary"}
+        </button>
+      </div>
+
+      {showSummary && <SummaryPanel tasks={tasks} />}
 
       <TaskInput
         input={input}
