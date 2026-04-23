@@ -6,9 +6,13 @@ import Dashboard from "./components/Dashboard";
 
 export default function App() {
   const [tasks, setTasks] = useState(() => {
+  try {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
-  });
+  } catch {
+    return [];
+  }
+});
 
   const [input, setInput] = useState("");
   const [filter, setFilter] = useState("all");
