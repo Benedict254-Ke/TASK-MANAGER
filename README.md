@@ -6,21 +6,11 @@ A modern, feature-rich task management application built with **React** and **Ta
 
 ## 🌐 Live Demo
 
-👉 https://your-vercel-link.vercel.app
-
----
-
-## 📸 Preview
-
-*Add screenshots here (recommended for portfolio impact)*
-
----
+👉 https://task-manager-fawn-omega.vercel.app/
 
 ## 🧠 Overview
 
 TaskFlow goes beyond a simple to-do list. It implements real-world productivity features such as **subtasks, drag-and-drop, smart completion logic, and calendar integration**, making it closer to tools like Notion, Trello, or Asana.
-
----
 
 ## ✨ Features
 
@@ -78,8 +68,6 @@ TaskFlow goes beyond a simple to-do list. It implements real-world productivity 
 
 * Uses **LocalStorage** to save tasks
 * Data remains after page refresh
-
----
 
 ## 🛠 Tech Stack
 
@@ -164,8 +152,8 @@ src/
 **Benedict Wambua (Lulu B)**
 Frontend Developer | Software Developer
 
-* GitHub: https://github.com/your-username
-* LinkedIn: https://linkedin.com/in/your-profile
+* GitHub: https://github.com/Benedict-Ke
+* LinkedIn: https://www.linkedin.com/in/benedict-musyoka-0a8904339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
 
 ---
 
