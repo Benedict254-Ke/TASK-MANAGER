@@ -226,9 +226,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
-        Task Manager
+      <h1 className="text-4xl font-extrabold text-center mb-2 text-gray-800">
+        TaskFlow
       </h1>
+      <p className="text-center text-gray-500 mb-6">
+        Stay organized. Stay productive.
+      </p>
 
       <div className="max-w-md mx-auto mb-6">
         <button
@@ -283,9 +286,16 @@ export default function App() {
         toggleSubtask={toggleSubtask}
         openInGoogleCalendar={openInGoogleCalendar}
       />
+
+      {filteredTasks.length === 0 && (
+        <p className="text-center text-gray-500 py-6">
+          No tasks yet — start by adding one 🚀
+        </p>
+      )}
+
+      <p className="text-center text-gray-400 text-sm mt-10">
+        Built by Lulu B 💻
+      </p>
     </div>
   );
 }
-<p className="text-center text-gray-400 text-sm mt-10">
-  Built by Lulu B 💻
-</p>
